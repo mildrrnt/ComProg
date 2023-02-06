@@ -1,14 +1,8 @@
-li = []
-sum = 0
-while True :
-  x = input()
-  if x == 'q': #quit if input = q
-    break
-  li.append(float(x)) #append list with x
-if li == []:
-  print('No Data')
-else:
-  for i in li: #can be done using sum(li)
-    sum += i
-  avg = round((sum/len(li)),2)
-  print(avg)
+n = 0
+sum_i = 0
+i = input()
+while i != "q":
+  sum_i += float(i)
+  n += 1
+  i = input()
+print(round((sum_i/n),2) if n > 0 else "No Data")
