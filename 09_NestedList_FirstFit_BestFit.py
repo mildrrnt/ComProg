@@ -1,31 +1,39 @@
-L = [[90,5],[50],[70,10]]
-D = [50,90,10,80,50,20]
-
 def first_fit(L,e):
-    nL = L
-    for i in range(len(nL)):
-        if sum(nL[i])+e<= 100:
-            nL[i].append(e)
-            break
-    return nL
+    for i in range(len(L)):
+        if sum(L[i])+e<= 100:
+            L[i].append(e)
+            return L
+    L.append([e])
+    return L
 
 def best_fit(L,e):
-    nL = L
-    x = [sum(i)+e for i in nL]
-    for i in range(len(x)):
-        if x[i] > 100:
-            x[i]=-999
-    ii = x.index(max(x))
-    nL[ii].append(e)
-    return nL
-'''
+    c = 0
+    p = -1
+    for i in range(len(L)):
+        if e + sum(L[i]) <= 100 and c < (e + sum(L[i])):
+            p = i
+            c = e + sum(L[i])
+    if p == -1:
+        L.append([e])
+    else: L[p].append(e)
+    return L
 
-'''
 def partition_FF(D):
-    x = [[D[0]]]
-    for i in range(1,len(D)+1):
-        x.append(first_fit(x,D[i]))
-    return x
+    L = []
+    for i in D:
+        if not L:
+            L.append([i])
+        else:
+            first_fit(L,i)
+    return L
 
+def partition_BF(D):
+    L = []
+    for i in D:
+        if not L:
+            L.append([i])
+        else:
+            best_fit(L,i)
+    return L
 
-print(partition_FF(D))
+exec(input().strip())
